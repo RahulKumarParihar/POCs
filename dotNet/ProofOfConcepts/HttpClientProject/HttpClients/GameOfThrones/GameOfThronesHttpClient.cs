@@ -22,11 +22,9 @@ namespace HttpClientProject.HttpClients.GameOfThrones
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
 
-        public async Task<string?> GetCharactersAsync()
+        public async Task<string?> GetBooksAsync()
         {
-            var client = _factory.CreateClient();
-
-            client.BaseAddress = new Uri(baseUri);
+            var client = _factory.CreateClient("gameOfThrones");
 
             return await client.GetStringAsync("books");
         }
@@ -38,6 +36,6 @@ namespace HttpClientProject.HttpClients.GameOfThrones
         /// Get all characters
         /// </summary>
         /// <returns></returns>
-        Task<string?> GetCharactersAsync();
+        Task<string?> GetBooksAsync();
     }
 }
