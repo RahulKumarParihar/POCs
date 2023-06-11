@@ -11,20 +11,18 @@ namespace HttpClientProject
         {
             var host = CreateHostBuilder(args).Build();
 
-            var gameOfThronesHttpClient = host.Services.GetRequiredService<IGameOfThronesHttpClient>();
+            var gameOfThronesHttpClient = host.Services.GetRequiredService<GameOfThronesHttpClient>();
             await gameOfThronesHttpClient.GetBooksAsync();
-            //Console.WriteLine(response);
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHttpClient("gameOfThrones", (serviceProvider, client) =>
+                    services.AddHttpClient<GameOfThronesHttpClient>("gameOfThrones", (serviceProvider, client) =>
                     {
                         client.BaseAddress = new Uri("https://www.anapioficeandfire.com/api/");
                     });
-                    services.AddScoped<IGameOfThronesHttpClient, GameOfThronesHttpClient>();
                 });
     }
 }

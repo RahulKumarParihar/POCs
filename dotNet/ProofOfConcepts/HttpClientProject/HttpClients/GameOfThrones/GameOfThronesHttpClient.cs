@@ -7,35 +7,28 @@ namespace HttpClientProject.HttpClients.GameOfThrones
     /// Games Of Thrones HttpClient
     /// </summary>
     /// <see href="https://www.milanjovanovic.tech/blog/the-right-way-to-use-httpclient-in-dotnet">Implementation reference</see>
-    public class GameOfThronesHttpClient : IGameOfThronesHttpClient
+    public class GameOfThronesHttpClient
     {
         private const string baseUri = "https://www.anapioficeandfire.com/api/";
 
-        private readonly IHttpClientFactory _factory;
+        private readonly HttpClient _client;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GameOfThronesHttpClient"/> class.
         /// </summary>
-        /// <param name="factory"></param>
-        public GameOfThronesHttpClient(IHttpClientFactory factory)
+        /// <param name="client"></param>
+        public GameOfThronesHttpClient(HttpClient client)
         {
-            _factory = factory ?? throw new ArgumentNullException(nameof(factory));
+            _client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
-        public async Task<string?> GetBooksAsync()
-        {
-            var client = _factory.CreateClient("gameOfThrones");
-
-            return await client.GetStringAsync("books");
-        }
-    }
-
-    public interface IGameOfThronesHttpClient
-    {
         /// <summary>
-        /// Get all characters
+        /// Gets all the game of thrones books
         /// </summary>
         /// <returns></returns>
-        Task<string?> GetBooksAsync();
+        public async Task<string?> GetBooksAsync()
+        {
+            return await _client.GetStringAsync("books");
+        }
     }
 }
