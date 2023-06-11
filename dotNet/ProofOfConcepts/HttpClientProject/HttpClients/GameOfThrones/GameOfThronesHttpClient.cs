@@ -6,6 +6,7 @@ namespace HttpClientProject.HttpClients.GameOfThrones
     /// <summary>
     /// Games Of Thrones HttpClient
     /// </summary>
+    /// <see href="https://www.milanjovanovic.tech/blog/the-right-way-to-use-httpclient-in-dotnet">Implementation reference</see>
     public class GameOfThronesHttpClient : IGameOfThronesHttpClient
     {
         private const string baseUri = "https://www.anapioficeandfire.com/api/";
