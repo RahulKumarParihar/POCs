@@ -5,9 +5,17 @@ using poc.aws.sqs.Producers;
 
 namespace poc.aws.sqs;
 
+/// <summary>
+/// Simple queue service collections
+/// </summary>
 public static class SqsServiceCollections
 {
-    public static IServiceCollection AddProducer(this IServiceCollection services)
+    /// <summary>
+    /// Adds the SQS producer.
+    /// </summary>
+    /// <param name="services">The services.</param>
+    /// <returns></returns>
+    public static IServiceCollection AddSqsProducer(this IServiceCollection services)
     {
         services.AddAWSService<IAmazonSQS>()
             .AddSingleton<IQueueManager, QueueManager>()
