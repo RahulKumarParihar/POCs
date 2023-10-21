@@ -1,6 +1,8 @@
 ﻿using Amazon.SQS;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using poc.aws.sqs.Admin;
+using poc.aws.sqs.Consumers;
 using poc.aws.sqs.Producers;
 
 namespace poc.aws.sqs;
@@ -18,8 +20,22 @@ public static class SqsServiceCollections
     public static IServiceCollection AddSqsProducer(this IServiceCollection services)
     {
         services.AddAWSService<IAmazonSQS>()
-            .AddSingleton<IQueueManager, QueueManager>()
-            .AddSingleton<IProducer, Producer>();
+            .AddSingleton<IProducer, Producer>()
+            .TryAddSingleton<IQueueManager, QueueManager>();
+
+        return services;
+    }
+
+    /// <summary>
+    /// Adds the SQS consumer.
+    /// </summary>
+    /// <param name="services">The services.</param>
+    /// <returns></returns>
+    public static IServiceCollection AddSqsConsumer(this IServiceCollection services)
+    {
+        services.AddAWSService<IAmazonSQS>()
+            .AddSingleton<IConsumer, Consumer>()
+            .TryAddSingleton<IQueueManager, QueueManager>();
 
         return services;
     }

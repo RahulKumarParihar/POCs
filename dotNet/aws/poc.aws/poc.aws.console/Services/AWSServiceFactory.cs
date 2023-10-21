@@ -1,25 +1,17 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using poc.aws.console.Services.SQS;
 using poc.aws.sqs.Admin;
+using poc.aws.sqs.Consumers;
 using poc.aws.sqs.Producers;
 
 namespace poc.aws.console.Services;
-
-/// <summary>
-/// Type of aws service
-/// </summary>
-internal enum AWSServiceType
-{
-    /// <summary>
-    /// The SQS
-    /// </summary>
-    sqs
-}
 
 /// <summary>
 /// AWS Service Factory
 /// </summary>
 internal class AWSServiceFactory
 {
+    private const string QUEUE_NAME = "demo_queue";
     private readonly IServiceProvider _serviceProvider;
 
     /// <summary>
@@ -41,8 +33,10 @@ internal class AWSServiceFactory
     {
         return serviceType switch
         {
-            AWSServiceType.sqs => 
-                new SqsProducerService("demo_queue", _serviceProvider.GetRequiredService<IQueueManager>(), _serviceProvider.GetRequiredService<IProducer>()),
+            AWSServiceType.sqsProducer => 
+                new SqsProducerService(QUEUE_NAME, _serviceProvider.GetRequiredService<IQueueManager>(), _serviceProvider.GetRequiredService<IProducer>()),
+            AWSServiceType.sqsConsumer =>
+                new SqsConsumerService(QUEUE_NAME, _serviceProvider.GetRequiredService<IQueueManager>(), _serviceProvider.GetRequiredService<IConsumer>()),
             _ => throw new KeyNotFoundException(nameof(serviceType)),
         };
     }

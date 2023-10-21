@@ -15,8 +15,4 @@
     <ProjectReference Include="..\poc.aws.sns\poc.aws.sns.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Consumers\" />
-  </ItemGroup>
-
 </Project>

@@ -14,7 +14,8 @@ internal class Program
             {
                 services
                     .AddSingleton<AWSServiceFactory>()
-                    .AddSqsProducer();
+                    .AddSqsProducer()
+                    .AddSqsConsumer();
             });
 
         IHost host = hostBuilder.Build();
@@ -23,10 +24,17 @@ internal class Program
         {
             var awsServiceFactory = host.Services.GetRequiredService<AWSServiceFactory>();
 
-            var awsService = awsServiceFactory.GetAWSService(AWSServiceType.sqs);
+            // SQS Producer
+            var sqsProducerService = awsServiceFactory.GetAWSService(AWSServiceType.sqsProducer);
             CancellationTokenSource producerCancellationTokenSource = new();
             producerCancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(10));
-            await awsService.ExecuteAsync(producerCancellationTokenSource.Token);
+            await sqsProducerService.ExecuteAsync(producerCancellationTokenSource.Token);
+
+            // SQS Consumer
+            var sqsConsumer = awsServiceFactory.GetAWSService(AWSServiceType.sqsConsumer);
+            CancellationTokenSource consumerCancellationTokenSource = new();
+            consumerCancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(10));
+            await sqsConsumer.ExecuteAsync(consumerCancellationTokenSource.Token);
         }
         catch (Exception ex)
         {
