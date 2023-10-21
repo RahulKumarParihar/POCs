@@ -45,6 +45,9 @@ public class Producer: IProducer
     }
 }
 
+/// <summary>
+/// SQS Message Producer
+/// </summary>
 public interface IProducer
 {
     /// <summary>
