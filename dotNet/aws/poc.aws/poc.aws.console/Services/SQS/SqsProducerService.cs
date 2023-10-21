@@ -2,7 +2,7 @@
 using poc.aws.sqs.Admin;
 using poc.aws.sqs.Producers;
 
-namespace poc.aws.console.Services;
+namespace poc.aws.console.Services.SQS;
 
 /// <summary>
 /// AWS SQS execution service
@@ -28,7 +28,7 @@ internal class SqsProducerService : IAWSService
 
     public async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        while(!stoppingToken.IsCancellationRequested)
+        while (!stoppingToken.IsCancellationRequested)
         {
             try
             {
