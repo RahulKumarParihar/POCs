@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "poc.aws.console", "poc.aws.console\poc.aws.console.csproj", "{290FEA7B-9B0B-4AC6-9053-49E3DDB36E24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "poc.aws.sns", "poc.aws.sns\poc.aws.sns.csproj", "{AC24EFE1-DC5B-43AF-8AAC-18254EDDFAFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "poc.aws.sqs", "poc.aws.sqs\poc.aws.sqs.csproj", "{DC6A1BA4-295D-49AD-AA53-2B7FF40EE627}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{290FEA7B-9B0B-4AC6-9053-49E3DDB36E24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{290FEA7B-9B0B-4AC6-9053-49E3DDB36E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{290FEA7B-9B0B-4AC6-9053-49E3DDB36E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{290FEA7B-9B0B-4AC6-9053-49E3DDB36E24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC24EFE1-DC5B-43AF-8AAC-18254EDDFAFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC24EFE1-DC5B-43AF-8AAC-18254EDDFAFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC24EFE1-DC5B-43AF-8AAC-18254EDDFAFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC24EFE1-DC5B-43AF-8AAC-18254EDDFAFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC6A1BA4-295D-49AD-AA53-2B7FF40EE627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC6A1BA4-295D-49AD-AA53-2B7FF40EE627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC6A1BA4-295D-49AD-AA53-2B7FF40EE627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC6A1BA4-295D-49AD-AA53-2B7FF40EE627}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
