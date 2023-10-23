@@ -13,30 +13,33 @@ namespace poc.aws.sqs;
 public static class SqsServiceCollections
 {
     /// <summary>
-    /// Adds the SQS producer.
+    /// Adds the SQS consumer.
     /// </summary>
     /// <param name="services">The services.</param>
     /// <returns></returns>
-    public static IServiceCollection AddSqsProducer(this IServiceCollection services)
+    public static IServiceCollection AddSqsConsumer(this IServiceCollection services)
+        => services.AddSqsManagers()
+            .AddSingleton<IConsumer, Consumer>();
+
+    /// <summary>
+    /// Adds the SQS managers.
+    /// </summary>
+    /// <param name="services">The services.</param>
+    /// <returns></returns>
+    public static IServiceCollection AddSqsManagers(this IServiceCollection services)
     {
         services.AddAWSService<IAmazonSQS>()
-            .AddSingleton<IProducer, Producer>()
             .TryAddSingleton<IQueueManager, QueueManager>();
 
         return services;
     }
 
     /// <summary>
-    /// Adds the SQS consumer.
+    /// Adds the SQS producer.
     /// </summary>
     /// <param name="services">The services.</param>
     /// <returns></returns>
-    public static IServiceCollection AddSqsConsumer(this IServiceCollection services)
-    {
-        services.AddAWSService<IAmazonSQS>()
-            .AddSingleton<IConsumer, Consumer>()
-            .TryAddSingleton<IQueueManager, QueueManager>();
-
-        return services;
-    }
+    public static IServiceCollection AddSqsProducer(this IServiceCollection services)
+        => services.AddSqsManagers()
+            .AddSingleton<IProducer, Producer>();
 }
