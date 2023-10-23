@@ -1,11 +1,11 @@
 ﻿using Amazon.Runtime;
 
-namespace poc.aws.sqs.Extensions;
+namespace poc.aws.core.Extensions;
 
 /// <summary>
 /// Extensions for Aws web service
 /// </summary>
-internal static class AWSWebServiceExtensions
+public static class AWSWebServiceExtensions
 {
     /// <summary>
     /// Validates the response.

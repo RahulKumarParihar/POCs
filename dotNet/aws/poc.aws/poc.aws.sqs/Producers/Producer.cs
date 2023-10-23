@@ -1,6 +1,6 @@
 ﻿using Amazon.SQS;
 using Amazon.SQS.Model;
-using poc.aws.sqs.Extensions;
+using poc.aws.core.Extensions;
 using System.Text.Json;
 
 namespace poc.aws.sqs.Producers;
