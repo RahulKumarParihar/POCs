@@ -7,6 +7,10 @@ namespace poc.aws.console;
 
 internal class Program
 {
+    /// <summary>
+    /// Defines the entry point of the application.
+    /// </summary>
+    /// <param name="args">The arguments.</param>
     static async Task Main(string[] args)
     {
         var hostBuilder = Host.CreateDefaultBuilder(args)
@@ -20,10 +24,19 @@ internal class Program
 
         IHost host = hostBuilder.Build();
 
+        var awsServiceFactory = host.Services.GetRequiredService<AWSServiceFactory>();
+
+        await ExecuteSQSAsync(awsServiceFactory);
+    }
+
+    /// <summary>
+    /// Executes the SQS asynchronous.
+    /// </summary>
+    /// <param name="awsServiceFactory">The aws service factory.</param>
+    static async Task ExecuteSQSAsync(AWSServiceFactory awsServiceFactory)
+    {
         try
         {
-            var awsServiceFactory = host.Services.GetRequiredService<AWSServiceFactory>();
-
             // SQS Producer
             var sqsProducerService = awsServiceFactory.GetAWSService(AWSServiceType.sqsProducer);
             CancellationTokenSource producerCancellationTokenSource = new();
