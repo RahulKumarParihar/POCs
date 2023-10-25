@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using poc.aws.console.Services.SNS;
 using poc.aws.console.Services.SQS;
+using poc.aws.sns.Admin;
 using poc.aws.sqs.Admin;
 using poc.aws.sqs.Consumers;
 using poc.aws.sqs.Producers;
@@ -34,9 +36,11 @@ internal class AWSServiceFactory
         return serviceType switch
         {
             AWSServiceType.sqsProducer => 
-                new SqsProducerService(QUEUE_NAME, _serviceProvider.GetRequiredService<IQueueManager>(), _serviceProvider.GetRequiredService<IProducer>()),
+                new QueueProducerService(QUEUE_NAME, _serviceProvider.GetRequiredService<IQueueManager>(), _serviceProvider.GetRequiredService<IProducer>()),
             AWSServiceType.sqsConsumer =>
-                new SqsConsumerService(QUEUE_NAME, _serviceProvider.GetRequiredService<IQueueManager>(), _serviceProvider.GetRequiredService<IConsumer>()),
+                new QueueConsumerService(QUEUE_NAME, _serviceProvider.GetRequiredService<IQueueManager>(), _serviceProvider.GetRequiredService<IConsumer>()),            
+            AWSServiceType.sns =>
+                new TopicProducerService("demo_sns", QUEUE_NAME, _serviceProvider.GetRequiredService<ITopicManager>(), _serviceProvider.GetRequiredService<ITopicSubscriptionManager>(), _serviceProvider.GetRequiredService<ITopicMessageProducer>()),
             _ => throw new KeyNotFoundException(nameof(serviceType)),
         };
     }

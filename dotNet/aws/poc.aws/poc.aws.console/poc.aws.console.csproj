@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\poc.aws.sns\poc.aws.sns.csproj" />
     <ProjectReference Include="..\poc.aws.sqs\poc.aws.sqs.csproj" />
   </ItemGroup>
 

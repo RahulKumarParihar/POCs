@@ -14,4 +14,9 @@ internal enum AWSServiceType
     /// The SQS consumer
     /// </summary>
     sqsConsumer,
+
+    /// <summary>
+    /// The SNS
+    /// </summary>
+    sns,
 }
