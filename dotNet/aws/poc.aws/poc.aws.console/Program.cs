@@ -19,7 +19,8 @@ internal class Program
                 services
                     .AddSingleton<AWSServiceFactory>()
                     .AddSqsProducer()
-                    .AddSqsConsumer();
+                    .AddSqsConsumer()
+                    .AddSnsProducer();
             });
 
         IHost host = hostBuilder.Build();
@@ -27,13 +28,15 @@ internal class Program
         var awsServiceFactory = host.Services.GetRequiredService<AWSServiceFactory>();
 
         await ExecuteSQSAsync(awsServiceFactory);
+
+        await ExecuteSNSAsync(awsServiceFactory);
     }
 
     /// <summary>
     /// Executes the SQS asynchronous.
     /// </summary>
     /// <param name="awsServiceFactory">The aws service factory.</param>
-    static async Task ExecuteSQSAsync(AWSServiceFactory awsServiceFactory)
+    internal static async Task ExecuteSQSAsync(AWSServiceFactory awsServiceFactory)
     {
         try
         {
@@ -42,6 +45,32 @@ internal class Program
             CancellationTokenSource producerCancellationTokenSource = new();
             producerCancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(10));
             await sqsProducerService.ExecuteAsync(producerCancellationTokenSource.Token);
+
+            // SQS Consumer
+            var sqsConsumer = awsServiceFactory.GetAWSService(AWSServiceType.sqsConsumer);
+            CancellationTokenSource consumerCancellationTokenSource = new();
+            consumerCancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(10));
+            await sqsConsumer.ExecuteAsync(consumerCancellationTokenSource.Token);
+        }
+        catch (Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// Executes the SNS asynchronous.
+    /// </summary>
+    /// <param name="awsServiceFactory">The aws service factory.</param>
+    internal static async Task ExecuteSNSAsync(AWSServiceFactory awsServiceFactory)
+    {
+        try
+        {
+            // SQS Producer
+            var snsService = awsServiceFactory.GetAWSService(AWSServiceType.sns);
+            CancellationTokenSource producerCancellationTokenSource = new();
+            producerCancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(10));
+            await snsService.ExecuteAsync(producerCancellationTokenSource.Token);
 
             // SQS Consumer
             var sqsConsumer = awsServiceFactory.GetAWSService(AWSServiceType.sqsConsumer);

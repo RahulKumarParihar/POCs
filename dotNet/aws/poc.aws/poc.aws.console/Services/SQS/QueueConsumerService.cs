@@ -9,13 +9,13 @@ namespace poc.aws.console.Services.SQS;
 /// AWS SQS execution service
 /// </summary>
 /// <seealso cref="IAWSService" />
-internal class SqsConsumerService : IAWSService
+internal class QueueConsumerService : IAWSService
 {
     private readonly string _queueName;
     private readonly IQueueManager _queueManager;
     private readonly IConsumer _consumer;
 
-    public SqsConsumerService(string queueName, IQueueManager queueManager, IConsumer consumer)
+    public QueueConsumerService(string queueName, IQueueManager queueManager, IConsumer consumer)
     {
         if (string.IsNullOrWhiteSpace(queueName))
         {

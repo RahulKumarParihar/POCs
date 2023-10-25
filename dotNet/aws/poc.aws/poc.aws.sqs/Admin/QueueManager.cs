@@ -1,6 +1,6 @@
 ﻿using Amazon.SQS;
 using Amazon.SQS.Model;
-using poc.aws.sqs.Extensions;
+using poc.aws.core.Extensions;
 
 namespace poc.aws.sqs.Admin;
 
