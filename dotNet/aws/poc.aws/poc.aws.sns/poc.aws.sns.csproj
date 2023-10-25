@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.SimpleNotificationService" Version="3.7.200.59" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\poc.aws.core\poc.aws.core.csproj" />
+    <ProjectReference Include="..\poc.aws.sqs\poc.aws.sqs.csproj" />
   </ItemGroup>
 
 </Project>

@@ -27,7 +27,7 @@ public class Producer: IProducer
         response.ValidateResponse($"Message not published to {queueUrl} queue.");
     }
 
-    private Dictionary<string, MessageAttributeValue> GetMessageAttributesFromMessage(Dictionary<string, string>? messageAttributes)
+    private static Dictionary<string, MessageAttributeValue> GetMessageAttributesFromMessage(Dictionary<string, string>? messageAttributes)
     {
         Dictionary<string, MessageAttributeValue> attributes = new();
 
